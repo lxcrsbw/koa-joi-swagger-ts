@@ -8,10 +8,5 @@
     "watch": true,
     "experimentalDecorators": true,
     "removeComments": true
-  },
-  "exclude": [
-    "node_modules",
-    "dist",
-    "**/__tests__/*"
-  ]
+  }
 }
