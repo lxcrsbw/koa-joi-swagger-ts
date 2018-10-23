@@ -1,20 +1,17 @@
-/**
- * Created by Z on 2017-05-17.
- */
-import {ISchema, toJoi, toSwagger} from "./ischema";
+import {ISchema, toJoi, toSwagger} from './ischema';
 import * as joi from 'joi';
-import {registMethod, registMiddleware} from "./utils/index";
+import {registMethod, registMiddleware} from './utils';
 
 export const TAG_PARAMETER = Symbol('Parameter');
 
-const PARAMETERS: Map<Function,Map<string,Map<string,IParameter>>> = new Map();
+const PARAMETERS: Map<Function, Map<string, Map<string, IParameter>>> = new Map();
 
 export interface IParameter {
     in: ENUM_PARAM_IN;
-    schema: joi.Schema|ISchema;
+    schema: joi.Schema | ISchema;
 }
 
-export enum ENUM_PARAM_IN{
+export enum ENUM_PARAM_IN {
     query,
     body,
     header,

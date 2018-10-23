@@ -1,8 +1,4 @@
-/**
- * Created by Z on 2017-05-17.
- */
-
-import {TAG_DEFINITION_NAME, TAG_DEFINITION_DESCRIPTION} from "./definition";
+import {TAG_DEFINITION_NAME, TAG_DEFINITION_DESCRIPTION} from './definition';
 
 import * as joi from 'joi';
 
@@ -14,7 +10,7 @@ export interface ISchema {
     $ref?: Function;
 }
 
-export function toSwagger(iSchema: ISchema|joi.Schema): any {
+export function toSwagger(iSchema: ISchema | joi.Schema): any {
     if (iSchema['isJoi']) {
         return j2s(iSchema).swagger;
     }
@@ -39,7 +35,7 @@ export function toSchema(Definition) {
     return j2s(joi.object().keys(key)).swagger;
 }
 
-export function toJoi(iSchema: ISchema|joi.Schema): joi.Schema|ISchema {
+export function toJoi(iSchema: ISchema | joi.Schema): joi.Schema | ISchema {
     if (iSchema['isJoi']) {
         return iSchema;
     }

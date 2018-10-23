@@ -1,9 +1,6 @@
-/**
- * Created by Z on 2017-05-17.
- */
 import {BaseController, UserController} from './init';
 import 'jest';
-import {TAG_SUMMARY} from "../lib/summary";
+import {TAG_SUMMARY} from '../lib';
 
 describe('Summary', () => {
     it(` BaseController's index summary should be equal 'BaseController[index]'`, () => {
@@ -12,7 +9,7 @@ describe('Summary', () => {
 
     });
 
-    it(` BaseController's doGet summary should be equal undefined`,()=>{
+    it(` BaseController's doGet summary should be equal undefined`, () => {
 
         expect(BaseController[TAG_SUMMARY].get('doGet')).toBe(undefined);
 

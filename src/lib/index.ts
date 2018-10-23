@@ -1,12 +1,9 @@
-import {TAG_CONTROLLER} from "./controller";
-import {TAG_METHOD} from "./method";
-import {TAG_MIDDLE_METHOD, TAG_GLOBAL_METHOD, TAG_MIDDLE_WARE} from "./utils/index";
-import {TAG_DEFINITION_NAME} from "./definition";
+import {TAG_CONTROLLER} from './controller';
+import {TAG_METHOD} from './method';
+import {TAG_MIDDLE_METHOD, TAG_GLOBAL_METHOD, TAG_MIDDLE_WARE} from './utils';
+import {TAG_DEFINITION_NAME} from './definition';
 import * as _ from 'lodash';
 import * as Router from 'koa-router';
-/**
- * Created by Z on 2017-05-17.
- */
 
 export * from './controller';
 
@@ -71,11 +68,11 @@ export interface IPath {
 export const DEFAULT_SWAGGER: ISWagger = {
     swagger: '2.0',
     info: {
-        version: "1.0.0",
-        title: "CDS-Router"
+        version: '1.0.0',
+        title: 'Koa-Joi-Swagger-TS server'
     },
-    host: 'localhost',
-    basePath: "/v3/api",
+    host: 'localhost:3002',
+    basePath: '/v1/api',
     schemes: ['http'],
     paths: {},
     definitions: {}
@@ -90,7 +87,7 @@ export const DEFAULT_PATH: IPath = {
     produces: ['application/json'],
     responses: {'200': {description: '成功'}},
     security: []
-}
+};
 
 export class CDSRouter {
 

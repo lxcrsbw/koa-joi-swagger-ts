@@ -1,9 +1,6 @@
-/**
- * Created by Z on 2017-05-18.
- */
 import {BaseController, UserController} from './init';
 import 'jest';
-import {TAG_TAG} from "../lib/tag";
+import {TAG_TAG} from '../lib';
 
 describe('Tag', () => {
     it(` BaseController's tags should be equal 'undefined'`, () => {

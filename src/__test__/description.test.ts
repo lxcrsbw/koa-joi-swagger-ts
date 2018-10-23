@@ -1,14 +1,11 @@
-/**
- * Created by Z on 2017-05-17.
- */
 import {BaseController, UserController} from './init';
 import 'jest';
-import {TAG_DESCRIPTION} from "../lib/description";
+import {TAG_DESCRIPTION} from '../lib';
 
 describe('Description', () => {
     it(` BaseController's index description should be equal 'BaseController[index]'`, () => {
 
-        expect(BaseController[TAG_DESCRIPTION].get('index')).toBe('首页');
+        expect(BaseController[TAG_DESCRIPTION].get('index')).toBe('home');
 
     });
 
@@ -18,9 +15,9 @@ describe('Description', () => {
 
     });
 
-    it(` UserController's doDelete description should be equal '删除用户'`, () => {
+    it(` UserController's doDelete description should be equal 'Delete User'`, () => {
 
-        expect(UserController[TAG_DESCRIPTION].get('doDelete')).toBe('删除用户');
+        expect(UserController[TAG_DESCRIPTION].get('doDelete')).toBe('Delete User');
 
     });
 

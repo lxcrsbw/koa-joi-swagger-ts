@@ -1,11 +1,8 @@
-import {registMethod} from "./utils/index";
-/**
- * Created by Z on 2017-05-17.
- */
+import {registMethod} from './utils';
 
 export const TAG_SUMMARY = Symbol('Summary');
 
-const SUMMARIES: Map<Function,Map<string,string>> = new Map();
+const SUMMARIES: Map<Function, Map<string, string>> = new Map();
 
 export function summary(summary: string): MethodDecorator {
     return function (target: any, key: string) {

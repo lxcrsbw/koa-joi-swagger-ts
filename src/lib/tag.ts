@@ -1,11 +1,8 @@
-import {registMethod} from "./utils/index";
-/**
- * Created by Z on 2017-05-18.
- */
+import {registMethod} from './utils';
 
 export const TAG_TAG = Symbol('Tag');
 
-const TAGS: Map<Function,Map<string,Set<string>>> = new Map();
+const TAGS: Map<Function, Map<string, Set<string>>> = new Map();
 
 export function tag(tag: string): MethodDecorator {
     return function (target: any, key: string) {

@@ -1,16 +1,12 @@
-/**
- * Created by Z on 2017-05-17.
- */
-
 export const TAG_MIDDLE_METHOD = Symbol('MiddleMethod');
 
 export const TAG_GLOBAL_METHOD = Symbol('GlobalMethod');
 
 export const TAG_MIDDLE_WARE = Symbol('MiddleWare');
 
-const MIDDLE_METHODS: Map<Function,Map<string,Function[]>> = new Map();
+const MIDDLE_METHODS: Map<Function, Map<string, Function[]>> = new Map();
 
-const MIDDLE_WARES: Map<Function,Map<string,Set<Function>>> = new Map();
+const MIDDLE_WARES: Map<Function, Map<string, Set<Function>>> = new Map();
 
 export function registMethod(target: any, key: string, deal: Function) {
     if (!MIDDLE_METHODS.has(target.constructor)) {

@@ -1,43 +1,38 @@
-/**
- * Created by Z on 2017-05-16.
- */
+import {controller} from '../../lib';
 
-import {controller} from '../../lib/controller';
-
-import {get, post, del, put} from '../../lib/method';
-import {parameter, ENUM_PARAM_IN} from "../../lib/parameter";
+import {get, post, del, put} from '../../lib';
+import {parameter, ENUM_PARAM_IN} from '../../lib';
 import * as joi from 'joi';
-import {definition} from "../../lib/definition";
-import {summary} from "../../lib/summary";
-import {response} from "../../lib/response";
-import {description} from "../../lib/description";
-import {tag} from "../../lib/tag";
+import {definition} from '../../lib';
+import {summary} from '../../lib';
+import {response} from '../../lib';
+import {description} from '../../lib';
+import {tag} from '../../lib';
 
-@definition('User', '用户实体')
+@definition('User', 'User Entity')
 export class UserSchema {
-    userName = joi.string().min(6).description('用户名').required();
-    userPass = joi.string().min(6).description('密码').required();
+    userName = joi.string().min(6).description('username').required();
+//    userPass = joi.string().min(6).description('password').required();
 }
 
 @controller('/v3/api')
 export class BaseController {
 
     @get('/')
-    @parameter('version', joi.string().description('版本'))
+    @parameter('version', joi.string().description('version'))
     @summary('BaseController[index]')
     @response(200)
-    @description('首页')
+    @description('home')
     index() {
 
     }
 
 }
 
-
 @controller('/user')
 export class UserController extends BaseController {
     @get('/')
-    @parameter('userName', joi.string().description('用户名'))
+    @parameter('userName', joi.string().description('username'))
     @response(200, {$ref: UserSchema})
     @response(201)
     @tag('User')
@@ -54,8 +49,8 @@ export class UserController extends BaseController {
     }
 
     @del('/{uid}')
-    @parameter('uid', joi.string().required().description('用户ID'), ENUM_PARAM_IN.path)
-    @description('删除用户')
+    @parameter('uid', joi.string().required().description('userID'), ENUM_PARAM_IN.path)
+    @description('Delete User')
     doDelete() {
 
     }
@@ -71,7 +66,7 @@ export class UserController extends BaseController {
 export class AdminController extends UserController {
 
     @del('/{adminId}')
-    @parameter('adminId', joi.string().required().description('管理员id'), ENUM_PARAM_IN.path)
+    @parameter('adminId', joi.string().required().description('admin id'), ENUM_PARAM_IN.path)
     doDelete() {
 
     }

@@ -1,17 +1,14 @@
-/**
- * Created by Z on 2017-05-17.
- */
-import {ISchema, toJoi, toSwagger} from "./ischema";
+import {ISchema, toJoi, toSwagger} from './ischema';
 import * as joi from 'joi';
-import {registMethod, registMiddleware} from "./utils/index";
+import {registMethod, registMiddleware} from './utils';
 
 export const TAG_RESPONSE = Symbol('Response');
 
-const RESPONSES: Map<Function,Map<string,Map<number,ISchema|joi.Schema>>> = new Map();
+const RESPONSES: Map<Function, Map<string, Map<number, ISchema | joi.Schema>>> = new Map();
 
 export const DEFAULT_RESPONSE: joi.Schema = joi.string().default('');
 
-export function response(code: number, schema?: ISchema|joi.Schema): MethodDecorator {
+export function response(code: number, schema?: ISchema | joi.Schema): MethodDecorator {
     return function (target: any, key: string) {
         if (!schema) {
             schema = DEFAULT_RESPONSE;
@@ -33,7 +30,7 @@ export function response(code: number, schema?: ISchema|joi.Schema): MethodDecor
         registMiddleware(target, key, async function fnResponse(ctx, next) {
             await next();
             if (RESPONSES.get(target.constructor).get(key).has(ctx.status)) {
-                let {error, value} =joi.validate(ctx.body, RESPONSES.get(target.constructor).get(key).get(ctx.status));
+                let {error, value} = joi.validate(ctx.body, RESPONSES.get(target.constructor).get(key).get(ctx.status));
                 if (error) {
                     ctx.body = {type: 'response', message: error.message};
                     ctx.status = 400;

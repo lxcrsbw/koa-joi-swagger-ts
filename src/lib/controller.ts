@@ -1,7 +1,3 @@
-/**
- * Created by Z on 2017-05-16.
- */
-
 export const TAG_CONTROLLER = Symbol('Controller');
 
 /**

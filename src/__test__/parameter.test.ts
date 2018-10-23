@@ -1,9 +1,6 @@
-/**
- * Created by Z on 2017-05-17.
- */
 import {BaseController, UserController} from './init';
 import 'jest';
-import {TAG_PARAMETER, ENUM_PARAM_IN} from "../lib/parameter";
+import {TAG_PARAMETER, ENUM_PARAM_IN} from '../lib';
 
 describe('Parameter', () => {
 
@@ -13,9 +10,9 @@ describe('Parameter', () => {
 
     });
 
-    it(` BaseController's index method [ parameter {version} ]'s description should be '版本'`, () => {
+    it(` BaseController's index method [ parameter {version} ]'s description should be 'version'`, () => {
 
-        expect(BaseController[TAG_PARAMETER].get('index').get('version').schema._description).toBe('版本');
+        expect(BaseController[TAG_PARAMETER].get('index').get('version').schema._description).toBe('version');
 
     });
 
@@ -49,9 +46,9 @@ describe('Parameter', () => {
 
     });
 
-    it(` UserController's doDelete method [ parameter {uid} ]'s description should be '用户ID'`, () => {
+    it(` UserController's doDelete method [ parameter {uid} ]'s description should be 'userID'`, () => {
 
-        expect(UserController[TAG_PARAMETER].get('doDelete').get('uid').schema._description).toBe('用户ID');
+        expect(UserController[TAG_PARAMETER].get('doDelete').get('uid').schema._description).toBe('userID');
 
     });
 

@@ -1,6 +1,3 @@
-/**
- * Created by iZhui on 2017/5/12.
- */
 export * from './src/lib/controller';
 
 export * from './src/lib/definition';

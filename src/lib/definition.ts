@@ -1,8 +1,5 @@
-import {registGlobal} from "./utils/index";
-import {toSchema} from "./ischema";
-/**
- * Created by Z on 2017-05-17.
- */
+import {registGlobal} from './utils';
+import {toSchema} from './ischema';
 
 export const TAG_DEFINITION_NAME = Symbol('DefinitionName');
 export const TAG_DEFINITION_DESCRIPTION = Symbol('DefinitionDescription');
@@ -12,7 +9,7 @@ export function definition(name?: string, description?: string): ClassDecorator 
         if (!name) {
             name = Definition.name;
         }
-        registGlobal(Definition, function definition(swagger){
+        registGlobal(Definition, function definition(swagger) {
             swagger.definitions[name] = toSchema(Definition);
         });
         Definition[TAG_DEFINITION_NAME] = name;

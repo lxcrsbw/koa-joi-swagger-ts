@@ -1,10 +1,6 @@
-/**
- * Created by Z on 2017-05-16.
- */
-
 import {BaseController, UserController} from './init';
 import 'jest';
-import {TAG_METHOD} from "../lib/method";
+import {TAG_METHOD} from '../lib';
 
 describe('Method', () => {
 
@@ -14,7 +10,7 @@ describe('Method', () => {
 
     });
 
-    it(`BaseController shoude be haven't [ POST /            ]`, () => {
+    it(`BaseController should be haven't [ POST /            ]`, () => {
 
         expect(BaseController[TAG_METHOD].get('/').get('post')).toBe(undefined);
 
@@ -26,7 +22,7 @@ describe('Method', () => {
 
     });
 
-    it(`BaseController should be havn't [ PUT /             ]`, () => {
+    it(`BaseController should be haven't [ PUT /             ]`, () => {
 
         expect(BaseController[TAG_METHOD].get('/').get('put')).toBe(undefined);
 

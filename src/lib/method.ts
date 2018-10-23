@@ -1,7 +1,3 @@
-/**
- * Created by Z on 2017-05-16.
- */
-
 export const TAG_METHOD = Symbol('Method');
 
 export interface IMethod {
@@ -9,11 +5,9 @@ export interface IMethod {
     handle: Function;
 }
 
-
 /**
- * 说一个坑爹的事儿:
- *  如果是类方法注解,
- *  typescript是通过prototype实现的,
+ *  If it is a class method annotation,
+ *  typescript is implemented by prototype,
  *  btw,
  *  class User extends BaseController {
  *      @get('/')
@@ -22,14 +16,14 @@ export interface IMethod {
  *      }
  *  }
  *
- *  会造成父级 Controller 注解污染
+ *  will cause the parent controller annotation pollution
  */
 
 /**
- * 防止继承污染
+ * Prevent inheritance pollution
  * @type {Map<any, any>}
  */
-const METHODS: Map<Function,Map<string,Map<string,IMethod>>> = new Map();
+const METHODS: Map<Function, Map<string, Map<string, IMethod>>> = new Map();
 
 /**
  * Method
