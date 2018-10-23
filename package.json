@@ -1,9 +1,10 @@
 {
   "name": "koa-joi-swagger-ts",
   "version": "1.0.0",
-  "description": "koa, joi, swagger, typescript",
+  "description": "Router with koa, joi and swagger on typescript",
   "main": "dist/lib/index.js",
   "scripts": {
+    "build": "tsc",
     "test": "./node_modules/.bin/jest --ci --coverage --no-cache"
   },
   "repository": "git+git@github.com:DragFAQ/koa-joi-swagger-ts.git",
@@ -17,12 +18,12 @@
     "joi": "^10.4.2",
     "joi-to-swagger": "^1.1.0",
     "koa-router": "^7.1.1",
-    "lodash": "^4.17.4",
-    "typescript": "^2.9.2"
+    "lodash": "^4.17.4"
   },
   "devDependencies": {
     "jest": "^20.0.4",
-    "ts-jest": "^20.0.3"
+    "ts-jest": "^20.0.3",
+    "typescript": "^2.9.2"
   },
   "jest": {
     "transform": {
