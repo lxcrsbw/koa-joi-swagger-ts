@@ -89,7 +89,7 @@ export const DEFAULT_PATH: IPath = {
     security: []
 };
 
-export class CDSRouter {
+export class KJSRouter {
 
     swagger: ISWagger;
 

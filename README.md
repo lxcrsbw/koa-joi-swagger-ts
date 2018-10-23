@@ -6,7 +6,7 @@
     
 ### Example (*TypeScript*)
 
-    import {parameter, get, post, del, controller, definition, CDSRouter, summary, response, tag, ENUM_PARAM_IN} from 'koa-joi-swagger-ts';
+    import {parameter, get, post, del, controller, definition, KJSRouter, summary, response, tag, ENUM_PARAM_IN} from 'koa-joi-swagger-ts';
     import * as joi from 'joi';
     import * as fs from 'fs';
     import {array, string} from 'joi';
@@ -78,7 +78,7 @@
         }
     }
     
-    const router = new CDSRouter();
+    const router = new KJSRouter();
     
     router.loadDefinition(UserSchema);
     router.loadDefinition(AdminSchema);
