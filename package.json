@@ -1,7 +1,14 @@
 {
   "name": "koa-joi-swagger-ts",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "Router with koa, joi and swagger on typescript",
+  "keywords": [
+    "koa",
+    "joi",
+    "swagger",
+    "typescript",
+    "router"
+  ],
   "main": "dist/lib/index.js",
   "scripts": {
     "build": "tsc",
