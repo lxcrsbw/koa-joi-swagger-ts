@@ -15,7 +15,7 @@
     "test": "./node_modules/.bin/jest --ci --coverage --no-cache"
   },
   "repository": "git+git@github.com:DragFAQ/koa-joi-swagger-ts.git",
-  "author": "drag",
+  "author": "DragFAQ",
   "license": "ISC",
   "dependencies": {
     "@types/jest": "^19.2.4",
