@@ -18,7 +18,7 @@ export enum ENUM_PARAM_IN {
     path
 }
 
-export function parameter(name: string, schema?: joi.Schema, paramIn?: ENUM_PARAM_IN): MethodDecorator {
+export function parameter(name: string, schema?: ISchema | joi.Schema, paramIn?: ENUM_PARAM_IN): MethodDecorator {
     return function (target: any, key: string) {
         if (!paramIn) {
             paramIn = ENUM_PARAM_IN.query;
@@ -33,11 +33,12 @@ export function parameter(name: string, schema?: joi.Schema, paramIn?: ENUM_PARA
             if (!router.parameters) {
                 router.parameters = [];
             }
-            router.parameters.push(Object.assign({
+          schema = toSwagger(schema);
+          router.parameters.push(Object.assign({
                 name,
                 in: ENUM_PARAM_IN[paramIn],
                 description: name
-            }, {required: paramIn == ENUM_PARAM_IN.path && true}, toSwagger(schema)));
+            }, {required: paramIn == ENUM_PARAM_IN.path && true}, ENUM_PARAM_IN.body === paramIn ? {schema} : schema));
         });
 
         registerMiddleware(target, key, async function fnParameter(ctx, next) {
@@ -52,7 +53,7 @@ export function parameter(name: string, schema?: joi.Schema, paramIn?: ENUM_PARA
                         tempSchema.params[name] = schema.schema;
                         break;
                     case ENUM_PARAM_IN.body:
-                        tempSchema.body[name] = schema.schema;
+                        tempSchema.body = schema.schema;
                 }
             }
             let {error, value} = joi.validate({
