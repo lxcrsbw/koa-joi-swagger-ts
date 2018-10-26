@@ -1,6 +1,6 @@
 import {ISchema, toJoi, toSwagger} from './ischema';
 import * as joi from 'joi';
-import {registMethod, registMiddleware} from './utils';
+import {registerMethod, registerMiddleware} from './utils';
 
 export const TAG_PARAMETER = Symbol('Parameter');
 
@@ -29,7 +29,7 @@ export function parameter(name: string, schema?: joi.Schema, paramIn?: ENUM_PARA
         if (!PARAMETERS.get(target.constructor).has(key)) {
             PARAMETERS.get(target.constructor).set(key, new Map());
         }
-        registMethod(target, key, function fnParameter(router) {
+        registerMethod(target, key, function fnParameter(router) {
             if (!router.parameters) {
                 router.parameters = [];
             }
@@ -40,7 +40,7 @@ export function parameter(name: string, schema?: joi.Schema, paramIn?: ENUM_PARA
             }, {required: paramIn == ENUM_PARAM_IN.path && true}, toSwagger(schema)));
         });
 
-        registMiddleware(target, key, async function fnParameter(ctx, next) {
+        registerMiddleware(target, key, async function fnParameter(ctx, next) {
             let schemas = PARAMETERS.get(target.constructor).get(key);
             let tempSchema = {params: {}, body: {}, query: {}};
             for (let [name, schema] of schemas) {

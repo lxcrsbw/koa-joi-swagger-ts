@@ -1,4 +1,4 @@
-import {registMethod} from './utils';
+import {registerMethod} from './utils';
 
 export const TAG_TAG = Symbol('Tag');
 
@@ -12,7 +12,7 @@ export function tag(tag: string): MethodDecorator {
         if (!TAGS.get(target.constructor).has(key)) {
             TAGS.get(target.constructor).set(key, new Set());
         }
-        registMethod(target, key, function fnTag(router) {
+        registerMethod(target, key, function fnTag(router) {
             if (!router.tags) {
                 router.tags = [];
             }

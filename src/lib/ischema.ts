@@ -22,7 +22,6 @@ export function toSwagger(iSchema: ISchema | joi.Schema): any {
         $ref = items['$ref'];
     }
     if ($ref && $ref[TAG_DEFINITION_NAME]) {
-        console.log($ref[TAG_DEFINITION_DESCRIPTION]);
         $ref = '#definitions/' + $ref[TAG_DEFINITION_NAME];
         description = $ref[TAG_DEFINITION_DESCRIPTION];
     }

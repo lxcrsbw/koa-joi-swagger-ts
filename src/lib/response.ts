@@ -1,6 +1,6 @@
 import {ISchema, toJoi, toSwagger} from './ischema';
 import * as joi from 'joi';
-import {registMethod, registMiddleware} from './utils';
+import {registerMethod, registerMiddleware} from './utils';
 
 export const TAG_RESPONSE = Symbol('Response');
 
@@ -19,7 +19,7 @@ export function response(code: number, schema?: ISchema | joi.Schema): MethodDec
         if (!RESPONSES.get(target.constructor).has(key)) {
             RESPONSES.get(target.constructor).set(key, new Map());
         }
-        registMethod(target, key, function fnResponse(router) {
+        registerMethod(target, key, function fnResponse(router) {
             if (!router.responses) {
                 router.responses = {};
             }
@@ -27,7 +27,7 @@ export function response(code: number, schema?: ISchema | joi.Schema): MethodDec
             router.responses[code] = Object.assign({description: schema['description'] || ''}, {schema});
         });
 
-        registMiddleware(target, key, async function fnResponse(ctx, next) {
+        registerMiddleware(target, key, async function fnResponse(ctx, next) {
             await next();
             if (RESPONSES.get(target.constructor).get(key).has(ctx.status)) {
                 let {error, value} = joi.validate(ctx.body, RESPONSES.get(target.constructor).get(key).get(ctx.status));

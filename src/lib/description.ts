@@ -1,4 +1,4 @@
-import {registMethod} from './utils';
+import {registerMethod} from './utils';
 
 export const TAG_DESCRIPTION = Symbol('Description');
 
@@ -9,7 +9,7 @@ export function description(description: string): MethodDecorator {
         if (!DESCRIPTIONS.has(target.constructor)) {
             DESCRIPTIONS.set(target.constructor, new Map());
         }
-        registMethod(target, key, function fnDescription(router) {
+        registerMethod(target, key, function fnDescription(router) {
             router.description = description;
         });
         DESCRIPTIONS.get(target.constructor).set(key, description);

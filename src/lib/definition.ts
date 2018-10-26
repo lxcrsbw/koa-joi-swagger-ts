@@ -1,4 +1,4 @@
-import {registGlobal} from './utils';
+import {registerGlobal} from './utils';
 import {toSchema} from './ischema';
 
 export const TAG_DEFINITION_NAME = Symbol('DefinitionName');
@@ -9,7 +9,7 @@ export function definition(name?: string, description?: string): ClassDecorator 
         if (!name) {
             name = Definition.name;
         }
-        registGlobal(Definition, function definition(swagger) {
+        registerGlobal(Definition, function definition(swagger) {
             swagger.definitions[name] = toSchema(Definition);
         });
         Definition[TAG_DEFINITION_NAME] = name;
