@@ -86,6 +86,10 @@
     router.loadController(UserController);
     router.loadController(AdminController);
     
+    router.setSwaggerFile('swagger.json');
+
+    router.loadSwaggerUI('/');
+
     fs.writeFileSync('./swagger.json', JSON.stringify(router.swagger));
     
     // console.log(router.getRouter());

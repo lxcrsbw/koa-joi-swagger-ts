@@ -5,6 +5,8 @@ import {TAG_DEFINITION_NAME} from "./definition";
 import * as _ from "lodash";
 import * as Router from "koa-router";
 
+const koaSwagger = require("koa2-swagger-ui")
+
 export * from "./controller";
 
 export * from "./definition";
@@ -95,6 +97,8 @@ export class KJSRouter {
 
   router: Router = new Router();
 
+  swaggerFileName: string;
+
   constructor(swagger: ISwagger = DEFAULT_SWAGGER) {
     this.swagger = swagger;
   }
@@ -136,6 +140,22 @@ export class KJSRouter {
         deal(this.swagger);
       })
     }
+  }
+
+  setSwaggerFile(fileName: string) {
+    this.swaggerFileName = this.swagger.basePath + "/" + fileName;
+    this.router.get(this.swaggerFileName, (ctx, next) => {
+      ctx.body = JSON.stringify(this.swagger)
+    });
+  }
+
+  loadSwaggerUI(url: string) {
+    this.router.get(url, koaSwagger({
+      routePrefix: false,
+      swaggerOptions: {
+        url: this.swagger.schemes[0] + "://" + this.swagger.host + this.swaggerFileName,
+      }
+    }));
   }
 
   getRouter() {
