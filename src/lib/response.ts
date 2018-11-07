@@ -32,8 +32,8 @@ export function response(code: number, schema?: ISchema | joi.Schema): MethodDec
             if (RESPONSES.get(target.constructor).get(key).has(ctx.status)) {
                 let {error, value} = joi.validate(ctx.body, RESPONSES.get(target.constructor).get(key).get(ctx.status));
                 if (error) {
-                    ctx.body = {type: 'response', message: error.message};
-                    ctx.status = 400;
+                    ctx.body = {code: 500, message: error.message};
+                    ctx.status = 500;
                     return;
                 }
                 ctx.body = value;

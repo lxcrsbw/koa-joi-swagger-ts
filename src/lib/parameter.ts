@@ -62,7 +62,7 @@ export function parameter(name: string, schema?: ISchema | joi.Schema, paramIn?:
                 query: ctx.request.query
             }, tempSchema);
             if (error) {
-                return ctx.throw(400, JSON.stringify({type: 'request', message: error.message}));
+                return ctx.throw(400, JSON.stringify({code: 400, message: error.message}));
             }
             ctx.params = value.params;
             ctx.request.body = value.body;

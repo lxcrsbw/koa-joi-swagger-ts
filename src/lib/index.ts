@@ -145,22 +145,17 @@ export class KJSRouter {
   setSwaggerFile(fileName: string) {
     this.swaggerFileName = this.swagger.basePath + "/" + fileName;
     this.router.get(this.swaggerFileName, (ctx, next) => {
-      ctx["isSwaggerData"] = true;
       ctx.body = JSON.stringify(this.swagger)
     });
   }
 
   loadSwaggerUI(url: string) {
-    this.router.get(url, (ctx, next) => {
-        ctx["isSwaggerData"] = true;
-        next();
-      },
-      koaSwagger({
-        routePrefix: false,
-        swaggerOptions: {
-          url: this.swagger.schemes[0] + "://" + this.swagger.host + this.swaggerFileName,
-        }
-      }));
+    this.router.get(url, koaSwagger({
+      routePrefix: false,
+      swaggerOptions: {
+        url: this.swagger.schemes[0] + "://" + this.swagger.host + this.swaggerFileName,
+      }
+    }));
   }
 
   getRouter() {
