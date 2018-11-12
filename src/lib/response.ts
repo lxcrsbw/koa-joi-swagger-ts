@@ -24,7 +24,12 @@ export function response(code: number, schema?: ISchema | joi.Schema): MethodDec
                 router.responses = {};
             }
             schema = toSwagger(schema);
-            router.responses[code] = Object.assign({description: schema['description'] || ''}, {schema});
+            let description = '';
+            if (schema['description']) {
+                description = schema['description'];
+                delete schema['description'];
+            }
+            router.responses[code] = Object.assign({description: description}, {schema});
         });
 
         registerMiddleware(target, key, async function fnResponse(ctx, next) {

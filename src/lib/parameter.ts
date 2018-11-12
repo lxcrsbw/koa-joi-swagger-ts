@@ -34,10 +34,15 @@ export function parameter(name: string, schema?: ISchema | joi.Schema, paramIn?:
                 router.parameters = [];
             }
           schema = toSwagger(schema);
+          let description = '';
+          if (schema['description']) {
+            description = schema['description'];
+            delete schema['description'];
+          }
           router.parameters.push(Object.assign({
                 name,
                 in: ENUM_PARAM_IN[paramIn],
-                description: name
+                description: description
             }, {required: paramIn == ENUM_PARAM_IN.path && true}, ENUM_PARAM_IN.body === paramIn ? {schema} : schema));
         });
 
