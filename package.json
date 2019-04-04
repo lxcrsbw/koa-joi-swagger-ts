@@ -1,6 +1,6 @@
 {
   "name": "koa-joi-swagger-ts",
-  "version": "1.0.15",
+  "version": "1.0.16",
   "description": "Router with koa, joi and swagger on typescript",
   "keywords": [
     "koa",
@@ -11,11 +11,18 @@
   ],
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
+  "files": [
+    "dist/*"
+  ],
   "scripts": {
     "build": "tsc --declaration",
-    "test": "./node_modules/.bin/jest --ci --coverage --no-cache"
+    "test": "./node_modules/.bin/jest --ci --coverage --no-cache",
+    "prepare": "npm run build"
   },
-  "repository": "git+git@github.com:DragFAQ/koa-joi-swagger-ts.git",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:DragFAQ/koa-joi-swagger-ts.git"
+  },
   "author": "DragFAQ",
   "license": "ISC",
   "dependencies": {
