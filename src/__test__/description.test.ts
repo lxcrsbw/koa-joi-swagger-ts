@@ -1,6 +1,6 @@
 import {BaseController, UserController} from './init';
 import 'jest';
-import {TAG_DESCRIPTION} from '../lib';
+import {TAG_DESCRIPTION} from '..';
 
 describe('Description', () => {
     it(` BaseController's index description should be equal 'BaseController[index]'`, () => {

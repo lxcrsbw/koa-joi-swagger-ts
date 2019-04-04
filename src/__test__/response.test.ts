@@ -1,6 +1,6 @@
 import {BaseController, UserController} from './init';
 import 'jest';
-import {TAG_RESPONSE} from '../lib';
+import {TAG_RESPONSE} from '..';
 
 describe('Response', () => {
 

@@ -1,6 +1,6 @@
 import {UserSchema} from './init';
 import 'jest';
-import {TAG_DEFINITION_NAME, TAG_DEFINITION_DESCRIPTION} from '../lib';
+import {TAG_DEFINITION_NAME, TAG_DEFINITION_DESCRIPTION} from '..';
 
 describe('Definition', () => {
 

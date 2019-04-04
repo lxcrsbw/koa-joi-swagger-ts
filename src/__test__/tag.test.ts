@@ -1,6 +1,6 @@
 import {BaseController, UserController} from './init';
 import 'jest';
-import {TAG_TAG} from '../lib';
+import {TAG_TAG} from '..';
 
 describe('Tag', () => {
     it(` BaseController's tags should be equal 'undefined'`, () => {

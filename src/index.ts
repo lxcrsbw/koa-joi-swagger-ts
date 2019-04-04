@@ -103,7 +103,7 @@ export class KJSRouter {
     this.swagger = swagger;
   }
 
-  loadController(Controller) {
+  loadController(Controller, decorator = null) {
     if (Controller[TAG_CONTROLLER]) {
       const allMethods = Controller[TAG_METHOD] || new Map();
       const paths = [...allMethods.keys()];
@@ -125,7 +125,9 @@ export class KJSRouter {
           }
           temp[k] = router;
           if (this.router[k]) {
-            this.router[k]((Controller[TAG_CONTROLLER] + path).replace(/{(\w+)}/g, ":$1"), ...(wares.concat(v.handle)));
+            this.router[k]((Controller[TAG_CONTROLLER] + path).replace(/{(\w+)}/g, ":$1"), ...(wares.concat(decorator ? async (ctx, next) => {
+              await decorator(v.handle, ctx, next, router.summary);
+            } : v.handle)));
           }
         }
         this.swagger.paths[fullPath] = temp;

@@ -1,6 +1,6 @@
 import {BaseController, UserController} from './init';
 import 'jest';
-import {TAG_PARAMETER, ENUM_PARAM_IN} from '../lib';
+import {TAG_PARAMETER, ENUM_PARAM_IN} from '..';
 
 describe('Parameter', () => {
 

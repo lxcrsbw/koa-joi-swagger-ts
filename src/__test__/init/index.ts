@@ -1,13 +1,13 @@
-import {controller} from '../../lib';
+import {controller} from '../..';
 
-import {get, post, del, put} from '../../lib';
-import {parameter, ENUM_PARAM_IN} from '../../lib';
+import {get, post, del, put} from '../..';
+import {parameter, ENUM_PARAM_IN} from '../..';
 import * as joi from 'joi';
-import {definition} from '../../lib';
-import {summary} from '../../lib';
-import {response} from '../../lib';
-import {description} from '../../lib';
-import {tag} from '../../lib';
+import {definition} from '../..';
+import {summary} from '../..';
+import {response} from '../..';
+import {description} from '../..';
+import {tag} from '../..';
 
 @definition('User', 'User Entity')
 export class UserSchema {

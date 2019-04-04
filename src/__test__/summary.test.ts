@@ -1,6 +1,6 @@
 import {BaseController, UserController} from './init';
 import 'jest';
-import {TAG_SUMMARY} from '../lib';
+import {TAG_SUMMARY} from '..';
 
 describe('Summary', () => {
     it(` BaseController's index summary should be equal 'BaseController[index]'`, () => {

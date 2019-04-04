@@ -1,6 +1,6 @@
 import {BaseController, UserController} from './init';
 import 'jest';
-import {TAG_METHOD} from '../lib';
+import {TAG_METHOD} from '..';
 
 describe('Method', () => {
 
