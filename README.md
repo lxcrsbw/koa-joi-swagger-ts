@@ -25,6 +25,18 @@
         }
     }
     
+    /**
+     * This method will be called by middleware instead of controller
+     */
+    const baseControllerFunction = async (controller, ctx, next, summary): Promise<void> => {
+        console.log(`${ctx.request.method} ${ctx.request.url}`);
+        try {
+            await controller(ctx);
+        } catch (e) {
+            console.log(e, `Error while executing '${summary}'`);
+        }
+    };
+
     @controller('/user')
     class UserController extends BaseController {
     
@@ -83,7 +95,8 @@
     router.loadDefinition(UserSchema);
     router.loadDefinition(AdminSchema);
     router.loadController(BaseController);
-    router.loadController(UserController);
+    // Process controller through pattern Decorator
+    router.loadController(UserController, baseControllerFunction);
     router.loadController(AdminController);
     
     router.setSwaggerFile('swagger.json');
