@@ -166,6 +166,12 @@ Parameters:
             ctx.body = {userName: ctx.params.userId.toString(), userPass: Date.now().toString()};
         }
     
+        @post('/upload')
+        @parameter('file1', {type: "file"}, ENUM_PARAM_IN.formData)
+        doUpload(ctx) {
+            ctx.body = { fileObj: ctx.body.file1};
+        }
+
         @post('/')
         doPost() {
         }
