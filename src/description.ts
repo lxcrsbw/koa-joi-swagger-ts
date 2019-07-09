@@ -1,6 +1,6 @@
-import {registerMethod} from './utils';
+import {registerMethod} from "./utils";
 
-export const TAG_DESCRIPTION = Symbol('Description');
+export const TAG_DESCRIPTION = Symbol("Description");
 
 const DESCRIPTIONS: Map<Function, Map<string, string>> = new Map();
 

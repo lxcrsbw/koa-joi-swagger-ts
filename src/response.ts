@@ -1,12 +1,12 @@
-import {ISchema, toJoi, toSwagger} from './ischema';
-import * as joi from 'joi';
-import {registerMethod, registerMiddleware} from './utils';
+import {ISchema, toJoi, toSwagger} from "./ischema";
+import * as joi from "joi";
+import {registerMethod, registerMiddleware} from "./utils";
 
-export const TAG_RESPONSE = Symbol('Response');
+export const TAG_RESPONSE = Symbol("Response");
 
 const RESPONSES: Map<Function, Map<string, Map<number, ISchema | joi.Schema>>> = new Map();
 
-export const DEFAULT_RESPONSE: joi.Schema = joi.string().default('');
+export const DEFAULT_RESPONSE: joi.Schema = joi.string().default("");
 
 export function response(code: number, schema?: ISchema | joi.Schema): MethodDecorator {
     return function (target: any, key: string) {
@@ -24,10 +24,10 @@ export function response(code: number, schema?: ISchema | joi.Schema): MethodDec
                 router.responses = {};
             }
             schema = toSwagger(schema);
-            let description = '';
-            if (schema['description']) {
-                description = schema['description'];
-                delete schema['description'];
+            let description = "";
+            if (schema["description"]) {
+                description = schema["description"];
+                delete schema["description"];
             }
             router.responses[code] = Object.assign({description: description}, {schema});
         });

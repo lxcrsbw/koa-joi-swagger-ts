@@ -1,4 +1,4 @@
-export const TAG_CONTROLLER = Symbol('Controller');
+export const TAG_CONTROLLER = Symbol("Controller");
 
 /**
  * Controller
@@ -15,5 +15,5 @@ export function controller(path?: string): ClassDecorator {
             path = parent[TAG_CONTROLLER] + path;
         }
         Controller[TAG_CONTROLLER] = path;
-    }
+    };
 }

@@ -12,7 +12,7 @@ export function safe(fn?: ErrorHandlerFunction, throwNext?: boolean) {
             try {
                 await originalMethod.apply(this, arguments);
             } catch(error) {
-                if(typeof fn === 'function') {
+                if(typeof fn === "function") {
                     await fn(error);
                 }
                 if(throwNext == true) {
@@ -73,5 +73,5 @@ export function after(...fn: MiddlewareFunction[]) {
         Object.defineProperty(target, propertyKey, descriptor);
         // change descriptor
         return descriptor;
-    }
+    };
 }

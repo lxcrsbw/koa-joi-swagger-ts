@@ -1,8 +1,8 @@
-import {registerGlobal} from './utils';
-import {toSchema} from './ischema';
+import {registerGlobal} from "./utils";
+import {toSchema} from "./ischema";
 
-export const TAG_DEFINITION_NAME = Symbol('DefinitionName');
-export const TAG_DEFINITION_DESCRIPTION = Symbol('DefinitionDescription');
+export const TAG_DEFINITION_NAME = Symbol("DefinitionName");
+export const TAG_DEFINITION_DESCRIPTION = Symbol("DefinitionDescription");
 
 export function definition(name?: string, description?: string): ClassDecorator {
     return function (Definition: Function) {

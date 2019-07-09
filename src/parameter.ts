@@ -1,8 +1,8 @@
-import {ISchema, toJoi, toSwagger} from './ischema';
-import * as joi from 'joi';
-import {registerMethod, registerMiddleware} from './utils';
+import {ISchema, toJoi, toSwagger} from "./ischema";
+import * as joi from "joi";
+import {registerMethod, registerMiddleware} from "./utils";
 
-export const TAG_PARAMETER = Symbol('Parameter');
+export const TAG_PARAMETER = Symbol("Parameter");
 
 const PARAMETERS: Map<Function, Map<string, Map<string, IParameter>>> = new Map();
 
@@ -35,10 +35,10 @@ export function parameter(name: string, schema?: ISchema | joi.Schema, paramIn?:
                 router.parameters = [];
             }
           schema = toSwagger(schema);
-          let description = '';
-          if (schema['description']) {
-            description = schema['description'];
-            delete schema['description'];
+          let description = "";
+          if (schema["description"]) {
+            description = schema["description"];
+            delete schema["description"];
           }
           router.parameters.push(Object.assign({
                 name,

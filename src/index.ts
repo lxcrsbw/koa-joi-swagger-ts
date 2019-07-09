@@ -105,7 +105,7 @@ export class KJSRouter {
     this.swagger = swagger;
   }
 
-  loadController(Controller, decorator = null) {
+  loadController(Controller, decorator = null): void {
     if (Controller[TAG_CONTROLLER]) {
       const allMethods = Controller[TAG_METHOD] || new Map();
       const paths = [...allMethods.keys()];
@@ -137,7 +137,7 @@ export class KJSRouter {
     }
   }
 
-  loadDefinition(Definition) {
+  loadDefinition(Definition): void {
     if (Definition[TAG_DEFINITION_NAME]) {
       const globalMethods = Definition[TAG_GLOBAL_METHOD] || [];
       globalMethods.forEach((deal) => {
@@ -146,14 +146,14 @@ export class KJSRouter {
     }
   }
 
-  setSwaggerFile(fileName: string) {
+  setSwaggerFile(fileName: string): void {
     this.swaggerFileName = this.swagger.basePath + "/" + fileName;
     this.router.get(this.swaggerFileName, (ctx, next) => {
       ctx.body = JSON.stringify(this.swagger)
     });
   }
 
-  loadSwaggerUI(url: string) {
+  loadSwaggerUI(url: string): void {
     this.router.get(url, koaSwagger({
       routePrefix: false,
       swaggerOptions: {
@@ -162,7 +162,7 @@ export class KJSRouter {
     }));
   }
 
-  getRouter() {
+  getRouter(): Router {
     return this.router;
   }
 

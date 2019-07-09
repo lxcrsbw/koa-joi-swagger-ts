@@ -1,4 +1,4 @@
-export const TAG_METHOD = Symbol('Method');
+export const TAG_METHOD = Symbol("Method");
 
 export interface IMethod {
     key: string;
@@ -10,7 +10,7 @@ export interface IMethod {
  *  typescript is implemented by prototype,
  *  btw,
  *  class User extends BaseController {
- *      @get('/')
+ *      @get("/")
  *      index(){
  *
  *      }
@@ -41,12 +41,12 @@ export function method(method?: string, path?: string): MethodDecorator {
         }
         METHODS.get(target.constructor).get(path).set(method, {key, handle: target[key]});
         target[TAG_METHOD] = target.constructor[TAG_METHOD] = METHODS.get(target.constructor);
-    }
+    };
 }
 
 
-export const get = (path?: string) => method('get', path);
-export const put = (path?: string) => method('put', path);
-export const del = (path?: string) => method('delete', path);
-export const post = (path?: string) => method('post', path);
-export const patch = (path?: string) => method('patch', path);
+export const get = (path?: string) => method("get", path);
+export const put = (path?: string) => method("put", path);
+export const del = (path?: string) => method("delete", path);
+export const post = (path?: string) => method("post", path);
+export const patch = (path?: string) => method("patch", path);
