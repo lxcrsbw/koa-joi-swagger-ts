@@ -1,30 +1,29 @@
-import {BaseController, UserController} from "./init";
-import "jest";
-import {TAG_SUMMARY} from "..";
+import { BaseController, UserController } from "./init";
+import { TAG_SUMMARY } from "..";
 
 describe("Summary", () => {
-    it(` BaseController's index summary should be equal "BaseController[index]"`, () => {
+  it(` BaseController's index summary should be equal "BaseController[index]"`, () => {
 
-        expect(BaseController[TAG_SUMMARY].get("index")).toBe("BaseController[index]");
+    expect(BaseController[TAG_SUMMARY].get("index")).toBe("BaseController[index]");
 
-    });
+  });
 
-    it(` BaseController's doGet summary should be equal undefined`, () => {
+  it(` BaseController's doGet summary should be equal undefined`, () => {
 
-        expect(BaseController[TAG_SUMMARY].get("doGet")).toBe(undefined);
+    expect(BaseController[TAG_SUMMARY].get("doGet")).toBe(undefined);
 
-    });
+  });
 
-    it(` UserController's doPost summary should be equal "UserController[doPost]"`, () => {
+  it(` UserController's doPost summary should be equal "UserController[doPost]"`, () => {
 
-        expect(UserController[TAG_SUMMARY].get("doPost")).toBe("UserController[doPost]");
+    expect(UserController[TAG_SUMMARY].get("doPost")).toBe("UserController[doPost]");
 
-    });
+  });
 
-    it(` UserController's doPut summary should be equal undefined`, () => {
+  it(` UserController's doPut summary should be equal undefined`, () => {
 
-        expect(UserController[TAG_SUMMARY].get("doPut")).toBe(undefined);
+    expect(UserController[TAG_SUMMARY].get("doPut")).toBe(undefined);
 
-    });
+  });
 
 });

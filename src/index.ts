@@ -1,7 +1,7 @@
-import {TAG_CONTROLLER} from "./controller";
-import {TAG_METHOD} from "./method";
-import {TAG_MIDDLE_METHOD, TAG_GLOBAL_METHOD, TAG_MIDDLE_WARE} from "./utils";
-import {TAG_DEFINITION_NAME} from "./definition";
+import { TAG_CONTROLLER } from "./controller";
+import { TAG_METHOD } from "./method";
+import { TAG_MIDDLE_METHOD, TAG_GLOBAL_METHOD, TAG_MIDDLE_WARE } from "./utils";
+import { TAG_DEFINITION_NAME } from "./definition";
 import * as _ from "lodash";
 import * as Router from "koa-router";
 
@@ -92,6 +92,14 @@ export const DEFAULT_PATH: IPath = {
   responses: {"200": {description: "Success"}},
   security: []
 };
+
+export enum HTTPStatusCodes {
+  success = 200,
+  internalServerError = 500,
+  created = 201,
+  other = 303,
+  badRequest = 400
+}
 
 export class KJSRouter {
 
