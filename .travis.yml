@@ -1,0 +1,6 @@
+language: nodejs
+before_script:
+  - npm ci
+  - npm run build
+script:
+  - npm run test

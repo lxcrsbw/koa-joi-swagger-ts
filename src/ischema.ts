@@ -2,7 +2,8 @@ import {TAG_DEFINITION_NAME, TAG_DEFINITION_DESCRIPTION} from './definition';
 
 import * as joi from 'joi';
 
-import * as j2s from 'joi-to-swagger';
+import j2s from 'joi-to-swagger';
+import { ObjectSchema } from "joi";
 
 export interface ISchema {
     type?: string;
@@ -13,7 +14,7 @@ export interface ISchema {
 
 export function toSwagger(iSchema: ISchema | joi.Schema): any {
     if (iSchema['isJoi']) {
-        return j2s(iSchema).swagger;
+        return j2s(iSchema as ObjectSchema).swagger;
     }
     let items = undefined;
     let $ref: any = iSchema['$ref'];
