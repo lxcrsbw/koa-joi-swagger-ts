@@ -33,7 +33,7 @@ export const response = (code: number, schema?: ISchema | joi.Schema): MethodDec
     router.responses[code] = Object.assign({description: description}, {schema});
   });
 
-  registerMiddleware(target, key, async (ctx: BaseContext, next: () => {}): Promise<void> => {
+  registerMiddleware(target, key, async (ctx: BaseContext, next: Function): Promise<void> => {
     await next();
     if (RESPONSES.get(target.constructor).get(key).has(ctx.status)) {
       const {error, value} = joi.validate(ctx.body, RESPONSES.get(target.constructor).get(key).get(ctx.status));
