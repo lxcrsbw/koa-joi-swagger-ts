@@ -5,7 +5,7 @@ import { TAG_DEFINITION_NAME } from "./definition";
 import * as _ from "lodash";
 import * as Router from "koa-router";
 
-const koaSwagger = require("koa2-swagger-ui");
+import koaSwagger from "koa2-swagger-ui";
 
 export * from "./controller";
 
@@ -64,33 +64,33 @@ export interface IPath {
   operationId: string;
   consumes: string[];
   produces: string[];
-  parameters?: any[];
-  responses: any;
-  security: any[];
+  parameters?: {}[];
+  responses: {};
+  security: {}[];
 }
 
 export const DEFAULT_SWAGGER: ISwagger = {
-  swagger: "2.0",
+  basePath: "/v1/api",
+  definitions: {},
+  host: "localhost:3002",
   info: {
     version: "1.0.0",
     title: "Koa-Joi-Swagger-TS server"
   },
-  host: "localhost:3002",
-  basePath: "/v1/api",
-  schemes: ["http"],
   paths: {},
-  definitions: {}
+  schemes: ["http"],
+  swagger: "2.0"
 };
 
 export const DEFAULT_PATH: IPath = {
-  tags: [],
-  summary: "",
+  consumes: ["application/json", "multipart/form-data", "application/x-www-form-urlencoded"],
   description: "",
   operationId: undefined,
-  consumes: ["application/json", "multipart/form-data", "application/x-www-form-urlencoded"],
   produces: ["application/json", "multipart/form-data", "application/x-www-form-urlencoded"],
   responses: {"200": {description: "Success"}},
-  security: []
+  security: [],
+  summary: "",
+  tags: []
 };
 
 export enum HTTPStatusCodes {
@@ -101,19 +101,21 @@ export enum HTTPStatusCodes {
   badRequest = 400
 }
 
+const FIRST_SCHEMA = 0;
+
 export class KJSRouter {
 
-  swagger: ISwagger;
+  private readonly swagger: ISwagger;
 
-  router: Router = new Router();
+  private router: Router = new Router();
 
-  swaggerFileName: string;
+  private swaggerFileName: string;
 
   constructor(swagger: ISwagger = DEFAULT_SWAGGER) {
     this.swagger = swagger;
   }
 
-  loadController(Controller, decorator = null): void {
+  public loadController(Controller, decorator: Function = null): void {
     if (Controller[TAG_CONTROLLER]) {
       const allMethods = Controller[TAG_METHOD] || new Map();
       const paths = [...allMethods.keys()];
@@ -123,8 +125,8 @@ export class KJSRouter {
         const temp = {};
         const fullPath = (Controller[TAG_CONTROLLER] + path).replace(this.swagger.basePath, "");
         const methods = allMethods.get(path);
-        for (let [k, v] of methods) {
-          let router = _.cloneDeep(DEFAULT_PATH);
+        for (const [k, v] of methods) {
+          const router = _.cloneDeep(DEFAULT_PATH);
           const methods = middleMethods.get(v.key);
           const wares = middleWares.has(v.key) ? [...middleWares.get(v.key)] : [];
           if (methods) {
@@ -145,7 +147,7 @@ export class KJSRouter {
     }
   }
 
-  loadDefinition(Definition): void {
+  public loadDefinition(Definition): void {
     if (Definition[TAG_DEFINITION_NAME]) {
       const globalMethods = Definition[TAG_GLOBAL_METHOD] || [];
       globalMethods.forEach((deal) => {
@@ -154,23 +156,23 @@ export class KJSRouter {
     }
   }
 
-  setSwaggerFile(fileName: string): void {
+  public setSwaggerFile(fileName: string): void {
     this.swaggerFileName = this.swagger.basePath + "/" + fileName;
     this.router.get(this.swaggerFileName, (ctx, next) => {
       ctx.body = JSON.stringify(this.swagger)
     });
   }
 
-  loadSwaggerUI(url: string): void {
+  public loadSwaggerUI(url: string): void {
     this.router.get(url, koaSwagger({
       routePrefix: false,
       swaggerOptions: {
-        url: this.swagger.schemes[0] + "://" + this.swagger.host + this.swaggerFileName,
+        url: this.swagger.schemes[FIRST_SCHEMA] + "://" + this.swagger.host + this.swaggerFileName
       }
     }));
   }
 
-  getRouter(): Router {
+  public getRouter(): Router {
     return this.router;
   }
 

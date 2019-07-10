@@ -12,7 +12,7 @@ export interface ISchema {
   $ref?: Function;
 }
 
-export function toSwagger(iSchema: ISchema | joi.Schema): any {
+export const toSwagger = (iSchema: ISchema | joi.Schema): any => {
   if (iSchema["isJoi"]) {
     return j2s(iSchema as ObjectSchema).swagger;
   }
@@ -32,24 +32,24 @@ export function toSwagger(iSchema: ISchema | joi.Schema): any {
     result = Object.assign(result, {required: iSchema["required"]});
   }
   return result;
-}
+};
 
-export function toSchema(Definition) {
+export const toSchema = (Definition) => {
   let key = {};
   key = Object.assign(key, new Definition());
   return j2s(joi.object().keys(key)).swagger;
-}
+};
 
-export function toJoi(iSchema: ISchema | joi.Schema): joi.Schema | ISchema {
+export const toJoi = (iSchema: ISchema | joi.Schema): joi.Schema | ISchema => {
   if (iSchema["isJoi"]) {
     return iSchema;
   }
-  let type = iSchema["type"] || "object";
+  const type = iSchema["type"] || "object";
   let schema = null;
-  let Ref: any = iSchema["$ref"] || (iSchema["items"] && iSchema["items"].$ref);
+  const Ref: any = iSchema["$ref"] || (iSchema["items"] && iSchema["items"].$ref);
   let keys = {};
   if (Ref) {
-    let ref = new Ref();
+    const ref = new Ref();
     keys = Object.assign({}, ref);
   }
 
@@ -72,4 +72,4 @@ export function toJoi(iSchema: ISchema | joi.Schema): joi.Schema | ISchema {
     default:
       return schema;
   }
-}
+};

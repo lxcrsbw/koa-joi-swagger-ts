@@ -32,17 +32,17 @@ Each controller can use 5 predefined rest methods `GET, PUT, POST, PATCH, DELETE
 ### Resolvers
 
 We have 3 type of resolvers (aka middlewares, but without next() functions) - functions which can be called before (or after) your controller method: 
-  * **safe** - this resolver can wrap on method by try-catch
-  * **before** - call function (or list of functions) before our target controller method
-  * **after** - call function (or list of functions) after our target method
+*   **safe** - this resolver can wrap on method by try-catch
+*   **before** - call function (or list of functions) before our target controller method
+*   **after** - call function (or list of functions) after our target method
 
 #### @safe(fn?: ErrorHandlerFunction, throwNext?: boolean)
 
 This decorator can wrap on your method into try-catch, and if something wrong - call function which specifiyed into parameter **fn** with Error argument
 
 Parameters:
-  * **fn** - function (optional) - call if throwed error
-  * **throwNext** - boolean (optional) - if true, will throw error to upper level
+*   **fn** - function (optional) - call if throwed error
+*   **throwNext** - boolean (optional) - if true, will throw error to upper level
 
 ##### Example of using @safe() resolver
     
@@ -65,7 +65,7 @@ Parameters:
 This decorator can add additional functions which will called before your controller method.  
 
 Parameters:
-  * **fn** - function - functions which will be called
+*   **fn** - function - functions which will be called
 
 ##### Example of using @before() resolver
     
@@ -92,7 +92,7 @@ This decorator can add additional functions which will called after your control
 Specific of decorators calling - is reversed order of calls, thats why, if you use few @after decorators - last after will be called as first, and first as last, thats why I recommend to use list of functions as multiple arguments if order matters something for your logic 
 
 Parameters:
-* **fn** - function - functions which will be called
+*   **fn** - function - functions which will be called
 
 ##### Example of using @after() resolver
     
