@@ -5,7 +5,7 @@ export const TAG_SUMMARY = Symbol("Summary");
 
 const SUMMARIES: Map<Function, Map<string, string>> = new Map();
 
-export const summary = (summary: string): MethodDecorator => (target: any, key: string): void => {
+export const summary = (summary: string): MethodDecorator => (target: {}, key: string): void => {
   if (!SUMMARIES.has(target.constructor)) {
     SUMMARIES.set(target.constructor, new Map());
   }
