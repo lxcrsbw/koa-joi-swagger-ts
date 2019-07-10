@@ -15,9 +15,11 @@ import {
 } from "../..";
 import * as joi from "joi";
 
+const STRING_TRIM = 6;
+
 @definition("User", "User Entity")
 export class UserSchema {
-  userName = joi.string().min(6).description("username").required();
+  public userName = joi.string().min(STRING_TRIM).description("username").required();
 //    userPass = joi.string().min(6).description("password").required();
 }
 
@@ -29,7 +31,7 @@ export class BaseController {
   @summary("BaseController[index]")
   @response(HTTPStatusCodes.success)
   @description("home")
-  index() {
+  public index(): void {
 
   }
 
@@ -42,7 +44,7 @@ export class UserController extends BaseController {
   @response(HTTPStatusCodes.success, {$ref: UserSchema})
   @response(HTTPStatusCodes.created)
   @tag("User")
-  doGet() {
+  public doGet(): void {
 
   }
 
@@ -50,20 +52,20 @@ export class UserController extends BaseController {
   @parameter("user", joi.string().description("user"), ENUM_PARAM_IN.body)
   @summary("UserController[doPost]")
   @response(HTTPStatusCodes.other)
-  doPost() {
+  public doPost(): void {
 
   }
 
   @del("/{uid}")
   @parameter("uid", joi.string().required().description("userID"), ENUM_PARAM_IN.path)
   @description("Delete User")
-  doDelete() {
+  public doDelete(): void {
 
   }
 
   @put("/")
   @parameter("token", joi.string().description("token"), ENUM_PARAM_IN.header)
-  doPut() {
+  public doPut(): void {
 
   }
 }
@@ -73,7 +75,7 @@ export class AdminController extends UserController {
 
   @del("/{adminId}")
   @parameter("adminId", joi.string().required().description("admin id"), ENUM_PARAM_IN.path)
-  doDelete() {
+  public doDelete(): void {
 
   }
 
