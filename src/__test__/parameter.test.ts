@@ -56,8 +56,7 @@ describe("Parameter", () => {
     expect(UserController[TAG_PARAMETER].get("doDelete").get("adminId")).toBe(undefined);
 
   });
-
-
+  
   it(` UserController's doPut method [ parameter {token}]'s in should be "ENUM_PARAM_IN.header"`, () => {
 
     expect(UserController[TAG_PARAMETER].get("doPut").get("token").in).toBe(ENUM_PARAM_IN.header);
