@@ -74,8 +74,8 @@ export const DEFAULT_SWAGGER: ISwagger = {
   definitions: {},
   host: "localhost:3002",
   info: {
-    version: "1.0.0",
-    title: "Koa-Joi-Swagger-TS server"
+    title: "Koa-Joi-Swagger-TS server",
+    version: "1.0.0"
   },
   paths: {},
   schemes: ["http"],
