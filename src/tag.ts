@@ -5,7 +5,7 @@ export const TAG_TAG = Symbol("Tag");
 
 const TAGS: Map<Function, Map<string, Set<string>>> = new Map();
 
-export const tag = (tag: string): MethodDecorator => (target: {}, key: string) => {
+export const tag = (tagString: string): MethodDecorator => (target: {}, key: string) => {
   if (!TAGS.has(target.constructor)) {
     TAGS.set(target.constructor, new Map());
   }
@@ -16,8 +16,8 @@ export const tag = (tag: string): MethodDecorator => (target: {}, key: string) =
     if (!router.tags) {
       router.tags = [];
     }
-    router.tags.push(tag);
+    router.tags.push(tagString);
   });
-  TAGS.get(target.constructor).get(key).add(tag);
+  TAGS.get(target.constructor).get(key).add(tagString);
   target[TAG_TAG] = target.constructor[TAG_TAG] = TAGS.get(target.constructor);
 };
