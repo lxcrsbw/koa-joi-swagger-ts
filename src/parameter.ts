@@ -42,31 +42,31 @@ export const parameter = (name: string, schema?: ISchema | joi.Schema, paramIn?:
       delete schema["description"];
     }
     router.parameters.push(Object.assign({
-      description: description,
+      description,
       in: ENUM_PARAM_IN[paramIn],
       name
-    }, {required: paramIn == ENUM_PARAM_IN.path && true}, ENUM_PARAM_IN.body === paramIn ? {schema} : schema));
+    }, {required: paramIn === ENUM_PARAM_IN.path && true}, ENUM_PARAM_IN.body === paramIn ? {schema} : schema));
   });
 
-  registerMiddleware(target, key, async function fnParameter(ctx: BaseContext, next: Function) {
+  registerMiddleware(target, key, async (ctx: BaseContext, next: Function) => {
     const schemas = PARAMETERS.get(target.constructor).get(key);
     const tempSchema = {params: {}, body: {}, query: {}, formData: {}};
     let body = ctx.request.body;
-    for (const [name, schema] of schemas) {
-      switch (schema.in) {
+    for (const [schemaName, schemaObject] of schemas) {
+      switch (schemaObject.in) {
         case ENUM_PARAM_IN.query:
-          tempSchema.query[name] = schema.schema;
+          tempSchema.query[schemaName] = schemaObject.schema;
           break;
         case ENUM_PARAM_IN.path:
-          tempSchema.params[name] = schema.schema;
+          tempSchema.params[schemaName] = schemaObject.schema;
           break;
         case ENUM_PARAM_IN.body:
-          tempSchema.body = schema.schema;
+          tempSchema.body = schemaObject.schema;
           break;
         case ENUM_PARAM_IN.formData:
-          tempSchema.formData[name] = schema.schema;
-          if (ctx.request.files && ctx.request.files[name]) {
-            body = Object.assign(body, {[name]: ctx.request.files[name]});
+          tempSchema.formData[schemaName] = schemaObject.schema;
+          if (ctx.request.files && ctx.request.files[schemaName]) {
+            body = Object.assign(body, {[schemaName]: ctx.request.files[schemaName]});
           }
           break;
       }

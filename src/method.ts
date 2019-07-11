@@ -21,27 +21,26 @@ export interface IMethod {
 
 /**
  * Prevent inheritance pollution
- * @type {Map<any, any>}
+ * @template map of methods {Map<any, any>}
  */
 const METHODS: Map<Function, Map<string, Map<string, IMethod>>> = new Map();
 
 /**
  * Method
- * @param method
- * @param path
- * @returns {(target:Object, key:string)=>undefined}
+ * @param methodString decorated method
+ * @param path relative path
+ * @returns filled METHODS map {(target:Object, key:string)=>undefined}
  */
-export const method = (method?: string, path?: string): MethodDecorator => (target: {}, key: string): void => {
+export const method = (methodString?: string, path?: string): MethodDecorator => (target: {}, key: string): void => {
   if (!METHODS.has(target.constructor)) {
     METHODS.set(target.constructor, new Map());
   }
   if (!METHODS.get(target.constructor).has(path)) {
     METHODS.get(target.constructor).set(path, new Map());
   }
-  METHODS.get(target.constructor).get(path).set(method, {key, handle: target[key]});
+  METHODS.get(target.constructor).get(path).set(methodString, {key, handle: target[key]});
   target[TAG_METHOD] = target.constructor[TAG_METHOD] = METHODS.get(target.constructor);
 };
-
 
 export const get = (path?: string) => method("get", path);
 export const put = (path?: string) => method("put", path);

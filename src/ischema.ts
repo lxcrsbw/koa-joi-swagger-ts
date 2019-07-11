@@ -16,9 +16,9 @@ export const toSwagger = (iSchema: ISchema | joi.Schema): any => {
   if (iSchema["isJoi"]) {
     return j2s(iSchema as ObjectSchema).swagger;
   }
-  let items = undefined;
+  let items;
   let $ref: any = iSchema["$ref"];
-  let description = undefined;
+  let description;
   if (iSchema["items"]) {
     items = toSwagger(iSchema["items"]);
     $ref = items["$ref"];

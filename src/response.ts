@@ -30,7 +30,7 @@ export const response = (code: number, schema?: ISchema | joi.Schema): MethodDec
       description = schema["description"];
       delete schema["description"];
     }
-    router.responses[code] = Object.assign({description: description}, {schema});
+    router.responses[code] = Object.assign({description}, {schema});
   });
 
   registerMiddleware(target, key, async (ctx: BaseContext, next: Function): Promise<void> => {
