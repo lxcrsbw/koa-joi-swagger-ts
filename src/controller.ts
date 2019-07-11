@@ -1,4 +1,4 @@
-export const TAG_CONTROLLER = Symbol("Controller");
+export const TAG_CONTROLLER: symbol = Symbol("Controller");
 
 /**
  * Controller
@@ -10,8 +10,8 @@ export const controller = (path?: string): ClassDecorator => (Controller: Functi
     path = Controller.name;
   }
   const parent = Object.getPrototypeOf(Controller);
-  if (parent[Symbol.for("Controller")]) {
-    path = parent[Symbol.for("Controller")] + path;
+  if (parent[TAG_CONTROLLER]) {
+    path = parent[TAG_CONTROLLER] + path;
   }
-  Controller[Symbol.for("Controller")] = path;
+  Controller[TAG_CONTROLLER] = path;
 };
