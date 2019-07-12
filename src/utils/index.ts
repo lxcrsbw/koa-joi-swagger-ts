@@ -1,8 +1,4 @@
-export const TAG_MIDDLE_METHOD = Symbol("MiddleMethod");
-
-export const TAG_GLOBAL_METHOD = Symbol("GlobalMethod");
-
-export const TAG_MIDDLE_WARE = Symbol("MiddleWare");
+import {Tags} from "../index";
 
 const MIDDLE_METHODS: Map<Function, Map<string, Function[]>> = new Map();
 
@@ -16,14 +12,14 @@ export const registerMethod = (target: {}, key: string, deal: Function): void =>
     MIDDLE_METHODS.get(target.constructor).set(key, []);
   }
   MIDDLE_METHODS.get(target.constructor).get(key).push(deal);
-  target[TAG_MIDDLE_METHOD] = target.constructor[TAG_MIDDLE_METHOD] = MIDDLE_METHODS.get(target.constructor);
+  target[Tags.tagMiddleMethod] = target.constructor[Tags.tagMiddleMethod] = MIDDLE_METHODS.get(target.constructor);
 };
 
 export const registerGlobal = (target: {}, deal: Function): void => {
-  if (!target[TAG_GLOBAL_METHOD]) {
-    target[TAG_GLOBAL_METHOD] = [];
+  if (!target[Tags.tagGlobalMethod]) {
+    target[Tags.tagGlobalMethod] = [];
   }
-  target[TAG_GLOBAL_METHOD].push(deal);
+  target[Tags.tagGlobalMethod].push(deal);
 };
 
 export const registerMiddleware = (target: {}, key: string, deal: Function): void => {
@@ -34,5 +30,5 @@ export const registerMiddleware = (target: {}, key: string, deal: Function): voi
     MIDDLE_WARES.get(target.constructor).set(key, new Set());
   }
   MIDDLE_WARES.get(target.constructor).get(key).add(deal);
-  target[TAG_MIDDLE_WARE] = target.constructor[TAG_MIDDLE_WARE] = MIDDLE_WARES.get(target.constructor);
+  target[Tags.tagMiddleWare] = target.constructor[Tags.tagMiddleWare] = MIDDLE_WARES.get(target.constructor);
 };

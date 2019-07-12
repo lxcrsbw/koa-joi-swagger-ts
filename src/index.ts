@@ -1,5 +1,3 @@
-import { TAG_MIDDLE_METHOD, TAG_GLOBAL_METHOD, TAG_MIDDLE_WARE } from "./utils";
-import { TAG_DEFINITION_NAME } from "./definition";
 import * as _ from "lodash";
 import * as Router from "koa-router";
 
@@ -90,8 +88,13 @@ export enum HTTPStatusCodes {
 
 export enum Tags {
   tagController = "Controller",
+  tagDefinitionDescription = "DefinitionDescription",
+  tagDefinitionName = "DefinitionName",
   tagDescription = "Description",
+  tagGlobalMethod = "GlobalMethod",
   tagMethod = "Method",
+  tagMiddleMethod = "MiddleMethod",
+  tagMiddleWare = "MiddleWare",
   tagParameter = "Parameter",
   tagResponse = "Response",
   tagSummary = "Summary",
@@ -127,8 +130,8 @@ export class KJSRouter {
     if (Controller[Tags.tagController]) {
       const allMethods = Controller[Tags.tagMethod] || new Map();
       const paths = [...allMethods.keys()];
-      const middleMethods = Controller[TAG_MIDDLE_METHOD] || new Map();
-      const middleWares = Controller[TAG_MIDDLE_WARE] || new Map();
+      const middleMethods = Controller[Tags.tagMiddleMethod] || new Map();
+      const middleWares = Controller[Tags.tagMiddleWare] || new Map();
       paths.forEach((path) => {
         const temp = {};
         const fullPath = (Controller[Tags.tagController] + path).replace(this._swagger.basePath, "");
@@ -156,8 +159,8 @@ export class KJSRouter {
   }
 
   public loadDefinition(Definition: any): void {
-    if (Definition[TAG_DEFINITION_NAME]) {
-      const globalMethods = Definition[TAG_GLOBAL_METHOD] || [];
+    if (Definition[Tags.tagDefinitionName]) {
+      const globalMethods = Definition[Tags.tagGlobalMethod] || [];
       globalMethods.forEach((deal) => {
         deal(this._swagger);
       });

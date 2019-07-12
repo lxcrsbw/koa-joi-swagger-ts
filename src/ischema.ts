@@ -1,9 +1,8 @@
-import { TAG_DEFINITION_NAME, TAG_DEFINITION_DESCRIPTION } from "./definition";
-
 import * as joi from "joi";
 
 import j2s from "joi-to-swagger";
 import { ObjectSchema } from "joi";
+import {Tags} from "./index";
 
 export interface ISchema {
   type?: string;
@@ -23,9 +22,9 @@ export const toSwagger = (iSchema: ISchema | joi.Schema): any => {
     items = toSwagger(iSchema["items"]);
     $ref = items["$ref"];
   }
-  if ($ref && $ref[TAG_DEFINITION_NAME]) {
-    description = $ref[TAG_DEFINITION_DESCRIPTION];
-    $ref = "#/definitions/" + $ref[TAG_DEFINITION_NAME];
+  if ($ref && $ref[Tags.tagDefinitionName]) {
+    description = $ref[Tags.tagDefinitionDescription];
+    $ref = "#/definitions/" + $ref[Tags.tagDefinitionName];
   }
   let result = {items, type: iSchema["type"] || "object", $ref, description};
   if (iSchema["required"]) {
@@ -56,8 +55,8 @@ export const toJoi = (iSchema: ISchema | joi.Schema): joi.Schema | ISchema => {
   if (joi[type]) {
     schema = joi[type]();
   }
-  if (schema && Ref && Ref[TAG_DEFINITION_DESCRIPTION]) {
-    schema = schema.description(Ref[TAG_DEFINITION_DESCRIPTION]);
+  if (schema && Ref && Ref[Tags.tagDefinitionDescription]) {
+    schema = schema.description(Ref[Tags.tagDefinitionDescription]);
   }
   if (schema && iSchema["required"]) {
     schema = schema.required();

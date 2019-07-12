@@ -1,8 +1,6 @@
 import { registerGlobal } from "./utils";
 import { toSchema } from "./ischema";
-
-export const TAG_DEFINITION_NAME = Symbol("DefinitionName");
-export const TAG_DEFINITION_DESCRIPTION = Symbol("DefinitionDescription");
+import {Tags} from "./index";
 
 export const definition = (name?: string, description?: string): ClassDecorator => (Definition: Function): void => {
   if (!name) {
@@ -11,6 +9,6 @@ export const definition = (name?: string, description?: string): ClassDecorator 
   registerGlobal(Definition, (swagger): void => {
     swagger.definitions[name] = toSchema(Definition);
   });
-  Definition[TAG_DEFINITION_NAME] = name;
-  Definition[TAG_DEFINITION_DESCRIPTION] = description || name;
+  Definition[Tags.tagDefinitionName] = name;
+  Definition[Tags.tagDefinitionDescription] = description || name;
 };
