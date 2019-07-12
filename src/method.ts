@@ -1,4 +1,4 @@
-export const TAG_METHOD = Symbol("Method");
+import {Tags} from "./index";
 
 export interface IMethod {
   key: string;
@@ -39,7 +39,7 @@ export const method = (methodString?: string, path?: string): MethodDecorator =>
     METHODS.get(target.constructor).set(path, new Map());
   }
   METHODS.get(target.constructor).get(path).set(methodString, {key, handle: target[key]});
-  target[TAG_METHOD] = target.constructor[TAG_METHOD] = METHODS.get(target.constructor);
+  target[Tags.tagMethod] = target.constructor[Tags.tagMethod] = METHODS.get(target.constructor);
 };
 
 export const get = (path?: string) => method("get", path);

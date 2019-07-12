@@ -1,7 +1,5 @@
 import {Tags} from "./index";
 
-export const TAG_CONTROLLER: symbol = Symbol("Controller");
-
 /**
  * Controller
  * @param path relative path

@@ -1,5 +1,3 @@
-import { TAG_CONTROLLER } from "./controller";
-import { TAG_METHOD } from "./method";
 import { TAG_MIDDLE_METHOD, TAG_GLOBAL_METHOD, TAG_MIDDLE_WARE } from "./utils";
 import { TAG_DEFINITION_NAME } from "./definition";
 import * as _ from "lodash";
@@ -91,7 +89,13 @@ export enum HTTPStatusCodes {
 }
 
 export enum Tags {
-  tagController = "Controller"
+  tagController = "Controller",
+  tagDescription = "Description",
+  tagMethod = "Method",
+  tagParameter = "Parameter",
+  tagResponse = "Response",
+  tagSummary = "Summary",
+  tagTag = "Tag"
 }
 
 export const DEFAULT_PATH: IPath = {
@@ -120,14 +124,14 @@ export class KJSRouter {
   }
 
   public loadController(Controller: any, decorator: Function = null): void {
-    if (Controller[TAG_CONTROLLER]) {
-      const allMethods = Controller[TAG_METHOD] || new Map();
+    if (Controller[Tags.tagController]) {
+      const allMethods = Controller[Tags.tagMethod] || new Map();
       const paths = [...allMethods.keys()];
       const middleMethods = Controller[TAG_MIDDLE_METHOD] || new Map();
       const middleWares = Controller[TAG_MIDDLE_WARE] || new Map();
       paths.forEach((path) => {
         const temp = {};
-        const fullPath = (Controller[TAG_CONTROLLER] + path).replace(this._swagger.basePath, "");
+        const fullPath = (Controller[Tags.tagController] + path).replace(this._swagger.basePath, "");
         const methods = allMethods.get(path);
         for (const [k, v] of methods) {
           const router = _.cloneDeep(DEFAULT_PATH);
@@ -141,7 +145,7 @@ export class KJSRouter {
           }
           temp[k] = router;
           if (this._router[k]) {
-            this._router[k]((Controller[TAG_CONTROLLER] + path).replace(/{(\w+)}/g, ":$1"), ...(wares.concat(decorator ? async (ctx, next) => {
+            this._router[k]((Controller[Tags.tagController] + path).replace(/{(\w+)}/g, ":$1"), ...(wares.concat(decorator ? async (ctx, next) => {
               await decorator(v.handle, ctx, next, router.summary);
             } : v.handle)));
           }

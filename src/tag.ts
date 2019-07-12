@@ -1,7 +1,5 @@
 import { registerMethod } from "./utils";
-import { IPath } from "./index";
-
-export const TAG_TAG = Symbol("Tag");
+import {IPath, Tags} from "./index";
 
 const TAGS: Map<Function, Map<string, Set<string>>> = new Map();
 
@@ -19,5 +17,5 @@ export const tag = (tagString: string): MethodDecorator => (target: {}, key: str
     router.tags.push(tagString);
   });
   TAGS.get(target.constructor).get(key).add(tagString);
-  target[TAG_TAG] = target.constructor[TAG_TAG] = TAGS.get(target.constructor);
+  target[Tags.tagTag] = target.constructor[Tags.tagTag] = TAGS.get(target.constructor);
 };

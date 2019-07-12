@@ -1,10 +1,8 @@
 import { ISchema, toJoi, toSwagger } from "./ischema";
 import * as joi from "joi";
 import { registerMethod, registerMiddleware } from "./utils";
-import { HTTPStatusCodes, IPath } from "./index";
+import {HTTPStatusCodes, IPath, Tags} from "./index";
 import { BaseContext } from "koa";
-
-export const TAG_RESPONSE = Symbol("Response");
 
 const RESPONSES: Map<Function, Map<string, Map<number, ISchema | joi.Schema>>> = new Map();
 
@@ -47,5 +45,5 @@ export const response = (code: number, schema?: ISchema | joi.Schema): MethodDec
   });
 
   RESPONSES.get(target.constructor).get(key).set(code, toJoi(schema));
-  target[TAG_RESPONSE] = target.constructor[TAG_RESPONSE] = RESPONSES.get(target.constructor);
+  target[Tags.tagResponse] = target.constructor[Tags.tagResponse] = RESPONSES.get(target.constructor);
 };

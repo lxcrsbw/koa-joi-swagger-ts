@@ -1,10 +1,8 @@
 import { ISchema, toJoi, toSwagger } from "./ischema";
 import * as joi from "joi";
 import { registerMethod, registerMiddleware } from "./utils";
-import { HTTPStatusCodes, IPath } from "./index";
+import {HTTPStatusCodes, IPath, Tags} from "./index";
 import { BaseContext } from "koa";
-
-export const TAG_PARAMETER = Symbol("Parameter");
 
 const PARAMETERS: Map<Function, Map<string, Map<string, IParameter>>> = new Map();
 
@@ -98,5 +96,5 @@ export const parameter = (name: string, schema?: ISchema | joi.Schema, paramIn?:
   });
 
   PARAMETERS.get(target.constructor).get(key).set(name, {in: paramIn, schema: toJoi(schema)});
-  target[TAG_PARAMETER] = target.constructor[TAG_PARAMETER] = PARAMETERS.get(target.constructor);
+  target[Tags.tagParameter] = target.constructor[Tags.tagParameter] = PARAMETERS.get(target.constructor);
 };
