@@ -89,6 +89,11 @@ export enum HTTPStatusCodes {
   other = 303,
   badRequest = 400
 }
+
+export enum Tags {
+  tagController = "Controller"
+}
+
 export const DEFAULT_PATH: IPath = {
   consumes: ["application/json", "multipart/form-data", "application/x-www-form-urlencoded"],
   description: "",

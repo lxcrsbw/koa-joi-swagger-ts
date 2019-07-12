@@ -1,3 +1,5 @@
+import {Tags} from "./index";
+
 export const TAG_CONTROLLER: symbol = Symbol("Controller");
 
 /**
@@ -10,8 +12,8 @@ export const controller = (path?: string): ClassDecorator => (Controller: Functi
     path = Controller.name;
   }
   const parent = Object.getPrototypeOf(Controller);
-  if (parent[TAG_CONTROLLER]) {
-    path = parent[TAG_CONTROLLER] + path;
+  if (parent[Tags.tagController]) {
+    path = parent[Tags.tagController] + path;
   }
-  Controller[TAG_CONTROLLER] = path;
+  Controller[Tags.tagController] = path;
 };
