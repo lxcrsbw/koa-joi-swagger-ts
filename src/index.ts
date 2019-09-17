@@ -158,12 +158,22 @@ export class KJSRouter {
     }
   }
 
-  public loadDefinition(Definition: any): void {
-    if (Definition[Tags.tagDefinitionName]) {
-      const globalMethods = Definition[Tags.tagGlobalMethod] || [];
-      globalMethods.forEach((deal) => {
-        deal(this._swagger);
+  public loadDefinition(Definition: any | []): void {
+    const processDefinition = (definition: any) => {
+      if (definition[Tags.tagDefinitionName]) {
+        const globalMethods = definition[Tags.tagGlobalMethod] || [];
+        globalMethods.forEach((deal) => {
+          deal(this._swagger);
+        });
+      }
+    };
+
+    if (Array.isArray(Definition)) {
+      Definition.forEach((item) => {
+        processDefinition(item);
       });
+    } else {
+      processDefinition(Definition);
     }
   }
 
