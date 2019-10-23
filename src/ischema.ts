@@ -25,6 +25,7 @@ export const toSwagger = (iSchema: ISchema | joi.Schema): any => {
   if ($ref && $ref[Tags.tagDefinitionName]) {
     description = $ref[Tags.tagDefinitionDescription];
     $ref = "#/definitions/" + $ref[Tags.tagDefinitionName];
+    return {$ref, description};
   }
   let result = {items, type: iSchema["type"] || "object", $ref, description};
   if (iSchema["required"]) {
