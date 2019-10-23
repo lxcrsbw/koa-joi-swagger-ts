@@ -208,6 +208,8 @@ Parameters:
     
     router.loadDefinition(UserSchema);
     router.loadDefinition(AdminSchema);
+    // Or you can:
+    // router.loadDefinition([UserSchema, AdminSchema]);
     router.loadController(BaseController);
     // Process controller through pattern Decorator
     router.loadController(UserController, baseControllerFunction);
