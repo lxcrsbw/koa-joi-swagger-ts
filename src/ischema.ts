@@ -1,6 +1,7 @@
 import * as joi from 'joi';
 
-import j2s from 'joi-to-swagger';
+// import j2s from 'joi-to-swagger';
+const j2s = require('joi-to-swagger');
 import { ObjectSchema } from 'joi';
 import { Tags } from './index';
 
