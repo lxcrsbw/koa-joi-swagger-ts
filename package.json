@@ -1,6 +1,6 @@
 {
   "name": "@lxsbw/koa-joi-swagger-ts",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "description": "Router with koa, joi and swagger on typescript",
   "keywords": [
     "koa",
