@@ -192,7 +192,7 @@ export class KJSRouter {
     this._router.get(url, koaSwagger({
       routePrefix: false,
       swaggerOptions: {
-        url: this._swagger.schemes[FIRST_SCHEMA] + "://" + this._swagger.host + this._swaggerFileName
+        url: this._swaggerFileName
       }
     }));
   }

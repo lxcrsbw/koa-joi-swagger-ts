@@ -1,6 +1,6 @@
 {
-  "name": "koa-joi-swagger-ts",
-  "version": "1.2.2",
+  "name": "@lxsbw/koa-joi-swagger-ts",
+  "version": "1.0.2",
   "description": "Router with koa, joi and swagger on typescript",
   "keywords": [
     "koa",
@@ -21,9 +21,9 @@
   },
   "repository": {
     "type": "git",
-    "url": "git@github.com:DragFAQ/koa-joi-swagger-ts.git"
+    "url": "git@github.com:lxcrsbw/koa-joi-swagger-ts.git"
   },
-  "author": "DragFAQ",
+  "author": "lxsbw",
   "license": "ISC",
   "dependencies": {
     "joi": "^14.3.1",
