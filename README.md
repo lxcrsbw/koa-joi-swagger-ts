@@ -1,7 +1,3 @@
-[![npm](https://img.shields.io/npm/v/koa-joi-swagger-ts.svg?logo=npm)](https://www.npmjs.com/package/koa-joi-swagger-ts)
-[![Codacy Badge](https://api.codacy.com/project/badge/Grade/bff7f599655549b394ecc9eae08023f7)](https://www.codacy.com/app/DragFAQ/koa-joi-swagger-ts?utm_source=github.com&utm_medium=referral&utm_content=DragFAQ/koa-joi-swagger-ts&utm_campaign=Badge_Grade)
-[![Build Status](https://travis-ci.org/DragFAQ/koa-joi-swagger-ts.svg?branch=master)](https://travis-ci.org/DragFAQ/koa-joi-swagger-ts)
-
 ## Koa-Joi-Swagger-TS
 
 ### How to use
@@ -256,3 +252,7 @@ Parameters:
     app.use(router.getRouter().allowedMethods());
 
     app.listen(3002);
+
+## Project example
+
+You can quickly test @lxsbw/koa-joi-swagger-ts with the project example [koa-base-ts](https://github.com/Lxsbw/koa-base-ts).
