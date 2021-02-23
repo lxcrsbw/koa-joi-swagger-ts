@@ -1,5 +1,5 @@
 import * as _ from 'lodash';
-import Router from 'koa-router';
+import * as Router from 'koa-router';
 
 import koaSwagger from 'koa2-swagger-ui';
 

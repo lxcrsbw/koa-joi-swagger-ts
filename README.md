@@ -221,11 +221,18 @@ Parameters:
           url: 'http://www.apache.org/licenses/LICENSE-2.0.html'
         }
       },
-      // host: `${sysConfig.host}:${sysConfig.port}`,
+      // host: '',
       basePath: '',
       schemes: ['http', 'https'],
       paths: {},
-      definitions: {}
+      definitions: {},
+      securityDefinitions: {
+        JWT: {
+          type: 'apiKey',
+          in: 'header',
+          name: 'Authorization'
+        }
+      }
     });
 
     router.loadDefinition(UserSchema);
