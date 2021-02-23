@@ -1,11 +1,13 @@
-import {Tags} from "./index";
+import { Tags } from './index';
 
 /**
  * Controller
  * @param path relative path
  * @returns ClassDecorator {(Controller:Function)=>undefined}
  */
-export const controller = (path?: string): ClassDecorator => (Controller: Function): void => {
+export const controller = (path?: string): ClassDecorator => (
+  Controller: Function
+): void => {
   if (!path) {
     path = Controller.name;
   }

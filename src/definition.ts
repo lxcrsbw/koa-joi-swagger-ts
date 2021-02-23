@@ -1,8 +1,11 @@
-import { registerGlobal } from "./utils";
-import { toSchema } from "./ischema";
-import {Tags} from "./index";
+import { registerGlobal } from './utils';
+import { toSchema } from './ischema';
+import { Tags } from './index';
 
-export const definition = (name?: string, description?: string): ClassDecorator => (Definition: Function): void => {
+export const definition = (
+  name?: string,
+  description?: string
+): ClassDecorator => (Definition: Function): void => {
   if (!name) {
     name = Definition.name;
   }
