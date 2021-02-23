@@ -1,27 +1,27 @@
-import * as _ from "lodash";
-import Router from "koa-router";
+import * as _ from 'lodash';
+import Router from 'koa-router';
 
-import koaSwagger from "koa2-swagger-ui";
+import koaSwagger from 'koa2-swagger-ui';
 
-export * from "./controller";
+export * from './controller';
 
-export * from "./definition";
+export * from './definition';
 
-export * from "./description";
+export * from './description';
 
-export * from "./ischema";
+export * from './ischema';
 
-export * from "./method";
+export * from './method';
 
-export * from "./parameter";
+export * from './parameter';
 
-export * from "./resolvers";
+export * from './resolvers';
 
-export * from "./response";
+export * from './response';
 
-export * from "./summary";
+export * from './summary';
 
-export * from "./tag";
+export * from './tag';
 
 export interface ISwagger {
   swagger: string;
@@ -36,7 +36,7 @@ export interface ISwagger {
     license?: {
       name: string;
       url: string;
-    }
+    };
   };
   host?: string;
   basePath?: string;
@@ -46,11 +46,18 @@ export interface ISwagger {
     externalDocs?: {
       description: string;
       url: string;
-    }
+    };
   }>;
   schemes: string[];
   paths: {};
   definitions: {};
+  /**
+   * Define security definitions list.
+   * Optional.
+   */
+  securityDefinitions?: {
+    [key: string]: ISwaggerSecurityDefinition;
+  };
 }
 
 export interface IPath {
@@ -66,16 +73,24 @@ export interface IPath {
 }
 
 export const DEFAULT_SWAGGER: ISwagger = {
-  basePath: "/v1/api",
+  basePath: '/v1/api',
   definitions: {},
-  host: "localhost:3002",
+  host: 'localhost:3002',
   info: {
-    title: "Koa-Joi-Swagger-TS server",
-    version: "1.0.0"
+    title: 'Koa-Joi-Swagger-TS server',
+    version: '1.0.0'
   },
   paths: {},
-  schemes: ["http"],
-  swagger: "2.0"
+  schemes: ['http'],
+  swagger: '2.0',
+  securityDefinitions: {
+    JWT: {
+      type: 'apiKey',
+      in: 'header',
+      name: 'Authorization'
+      // description: ''
+    }
+  }
 };
 
 export enum HTTPStatusCodes {
@@ -87,35 +102,59 @@ export enum HTTPStatusCodes {
 }
 
 export enum Tags {
-  tagController = "Controller",
-  tagDefinitionDescription = "DefinitionDescription",
-  tagDefinitionName = "DefinitionName",
-  tagDescription = "Description",
-  tagGlobalMethod = "GlobalMethod",
-  tagMethod = "Method",
-  tagMiddleMethod = "MiddleMethod",
-  tagMiddleWare = "MiddleWare",
-  tagParameter = "Parameter",
-  tagResponse = "Response",
-  tagSummary = "Summary",
-  tagTag = "Tag"
+  tagController = 'Controller',
+  tagDefinitionDescription = 'DefinitionDescription',
+  tagDefinitionName = 'DefinitionName',
+  tagDescription = 'Description',
+  tagGlobalMethod = 'GlobalMethod',
+  tagMethod = 'Method',
+  tagMiddleMethod = 'MiddleMethod',
+  tagMiddleWare = 'MiddleWare',
+  tagParameter = 'Parameter',
+  tagResponse = 'Response',
+  tagSummary = 'Summary',
+  tagTag = 'Tag'
+}
+
+export interface ISwaggerSecurityDefinition {
+  /**
+   * Define type of security.
+   */
+  type: string;
+  /**
+   * Define where security set.
+   * Optional.
+   */
+  in?: string;
+  /**
+   * Define name of security.
+   * Optional.
+   */
+  name?: string;
 }
 
 export const DEFAULT_PATH: IPath = {
-  consumes: ["application/json", "multipart/form-data", "application/x-www-form-urlencoded"],
-  description: "",
+  consumes: [
+    'application/json',
+    'multipart/form-data',
+    'application/x-www-form-urlencoded'
+  ],
+  description: '',
   operationId: undefined,
-  produces: ["application/json", "multipart/form-data", "application/x-www-form-urlencoded"],
-  responses: {[HTTPStatusCodes.success]: {description: "Success"}},
+  produces: [
+    'application/json',
+    'multipart/form-data',
+    'application/x-www-form-urlencoded'
+  ],
+  responses: { [HTTPStatusCodes.success]: { description: 'Success' } },
   security: [],
-  summary: "",
+  summary: '',
   tags: []
 };
 
 const FIRST_SCHEMA = 0;
 
 export class KJSRouter {
-
   private readonly _swagger: ISwagger;
 
   private _router: Router = new Router();
@@ -134,23 +173,37 @@ export class KJSRouter {
       const middleWares = Controller[Tags.tagMiddleWare] || new Map();
       paths.forEach((path) => {
         const temp = {};
-        const fullPath = (Controller[Tags.tagController] + path).replace(this._swagger.basePath, "");
+        const fullPath = (Controller[Tags.tagController] + path).replace(
+          this._swagger.basePath,
+          ''
+        );
         const methods = allMethods.get(path);
         for (const [k, v] of methods) {
           const router = _.cloneDeep(DEFAULT_PATH);
           const mMethods = middleMethods.get(v.key);
-          const wares = middleWares.has(v.key) ? [...middleWares.get(v.key)] : [];
+          const wares = middleWares.has(v.key)
+            ? [...middleWares.get(v.key)]
+            : [];
           if (mMethods) {
             for (let i = 0, len = mMethods.length; i < len; i++) {
-
               mMethods[i](router, this._swagger);
             }
           }
           temp[k] = router;
           if (this._router[k]) {
-            this._router[k]((Controller[Tags.tagController] + path).replace(/{(\w+)}/g, ":$1"), ...(wares.concat(decorator ? async (ctx, next) => {
-              await decorator(v.handle, ctx, next, router.summary);
-            } : v.handle)));
+            this._router[k](
+              (Controller[Tags.tagController] + path).replace(
+                /{(\w+)}/g,
+                ':$1'
+              ),
+              ...wares.concat(
+                decorator
+                  ? async (ctx, next) => {
+                      await decorator(v.handle, ctx, next, router.summary);
+                    }
+                  : v.handle
+              )
+            );
           }
         }
         this._swagger.paths[fullPath] = temp;
@@ -178,7 +231,7 @@ export class KJSRouter {
   }
 
   public setSwaggerFile(fileName: string): void {
-    this._swaggerFileName = this._swagger.basePath + "/" + fileName;
+    this._swaggerFileName = this._swagger.basePath + '/' + fileName;
     this._router.get(this._swaggerFileName, (ctx, next) => {
       ctx.body = JSON.stringify(this._swagger);
     });
@@ -189,16 +242,18 @@ export class KJSRouter {
   }
 
   public loadSwaggerUI(url: string): void {
-    this._router.get(url, koaSwagger({
-      routePrefix: false,
-      swaggerOptions: {
-        url: this._swaggerFileName
-      }
-    }));
+    this._router.get(
+      url,
+      koaSwagger({
+        routePrefix: false,
+        swaggerOptions: {
+          url: this._swaggerFileName
+        }
+      })
+    );
   }
 
   public getRouter(): Router {
     return this._router;
   }
-
 }
