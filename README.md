@@ -1,4 +1,4 @@
-## Koa-Joi-Swagger-TS
+## koa-joi-swagger-ts
 
 ### How to use
 
@@ -46,7 +46,7 @@ Parameters:
 
 ##### Example of using @safe() resolver
 
-    import {safe, parameter, del, controller, ENUM_PARAM_IN} from "koa-joi-swagger-ts";
+    import {safe, parameter, del, controller, ENUM_PARAM_IN} from "@lxsbw/koa-joi-swagger-ts";
 
     // ...somecodehere...
 
@@ -70,7 +70,7 @@ Parameters:
 
 ##### Example of using @before() resolver
 
-    import {before, parameter, del, controller, ENUM_PARAM_IN} from "koa-joi-swagger-ts";
+    import {before, parameter, del, controller, ENUM_PARAM_IN} from "@lxsbw/koa-joi-swagger-ts";
 
     // ...somecodehere...
 
@@ -98,7 +98,7 @@ Parameters:
 
 ##### Example of using @after() resolver
 
-    import {after, parameter, del, controller, ENUM_PARAM_IN} from "koa-joi-swagger-ts";
+    import {after, parameter, del, controller, ENUM_PARAM_IN} from "@lxsbw/koa-joi-swagger-ts";
 
     // ...somecodehere...
 
@@ -115,7 +115,7 @@ Parameters:
 
 ## Example (_TypeScript_)
 
-    import {parameter, get, post, del, controller, definition, KJSRouter, summary, response, tag, ENUM_PARAM_IN} from "koa-joi-swagger-ts";
+    import {parameter, get, post, del, controller, definition, KJSRouter, summary, response, tag, ENUM_PARAM_IN} from "@lxsbw/koa-joi-swagger-ts";
     import * as joi from "joi";
     import * as fs from "fs";
     import {array, string} from "joi";
