@@ -118,7 +118,7 @@ Parameters:
 
 ## Example (_TypeScript_)
 
-    import {parameter, get, post, del, controller, definition, KJSRouter, summary, response, tag, ENUM_PARAM_IN} from "@lxsbw/koa-joi-swagger-ts";
+    import {parameter, get, post, del, controller, definition, KoaSwaggerRouter, summary, response, tag, ENUM_PARAM_IN} from "@lxsbw/koa-joi-swagger-ts";
     import * as joi from "joi";
     import * as fs from "fs";
     import {array, string} from "joi";
@@ -208,7 +208,7 @@ Parameters:
         }
     }
 
-    const router = new KJSRouter({
+    const router = new KoaSwaggerRouter({
       swagger: '2.0',
       info: {
         description:
