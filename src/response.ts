@@ -1,8 +1,8 @@
 import { ISchema, toJoi, toSwagger } from './ischema';
-import * as joi from 'joi';
 import { registerMethod, registerMiddleware } from './utils';
 import { HTTPStatusCodes, IPath, Tags } from './index';
 import { BaseContext } from 'koa';
+import * as joi from 'joi';
 
 const RESPONSES: Map<
   Function,

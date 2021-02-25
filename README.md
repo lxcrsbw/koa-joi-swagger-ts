@@ -1,6 +1,9 @@
-## koa-joi-swagger-ts
+# @lxsbw/koa-joi-swagger-ts [![NPM version][npm-image]][npm-url]
 
-### How to use
+[npm-image]: https://img.shields.io/npm/v/@lxsbw/koa-joi-swagger-ts.svg
+[npm-url]: https://npmjs.org/package/@lxsbw/koa-joi-swagger-ts
+
+## How to use
 
     npm install @lxsbw/koa-joi-swagger-ts --save
 

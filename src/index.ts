@@ -4,23 +4,14 @@ import * as Router from 'koa-router';
 const koaSwagger = require('koa2-swagger-ui');
 
 export * from './controller';
-
 export * from './definition';
-
 export * from './description';
-
 export * from './ischema';
-
 export * from './method';
-
 export * from './parameter';
-
 export * from './resolvers';
-
 export * from './response';
-
 export * from './summary';
-
 export * from './tag';
 
 export interface ISwagger {
@@ -88,7 +79,6 @@ export const DEFAULT_SWAGGER: ISwagger = {
       type: 'apiKey',
       in: 'header',
       name: 'Authorization'
-      // description: ''
     }
   }
 };
@@ -154,7 +144,7 @@ export const DEFAULT_PATH: IPath = {
 
 const FIRST_SCHEMA = 0;
 
-export class KJSRouter {
+export class KoaSwaggerRouter {
   private readonly _swagger: ISwagger;
 
   private _router: Router = new Router();
